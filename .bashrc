@@ -1,30 +1,32 @@
-#
-# ~/.bashrc
-#
+export SSLKEYLOGFILE=~/.ssl-key.log
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-
-
-        RED="\[\033[0;31m\]"
-     YELLOW="\[\033[1;33m\]"
-      GREEN="\[\033[0;32m\]"
-       BLUE="\[\033[1;34m\]"
-  LIGHT_RED="\[\033[1;31m\]"
-LIGHT_GREEN="\[\033[1;32m\]"
-       CYAN="\[\033[0;36m\]"
- LIGHT_CYAN="\[\033[1;36m\]"
-      WHITE="\[\033[1;37m\]"
- LIGHT_GRAY="\[\033[0;37m\]"
- COLOR_NONE="\[\e[0m\]"
+# User specific aliases and functions
 
 
-#PS1="$PS1 "
-export PS1="Δ  "
-#xhost +local:docker
+prompt() {
+        export PS1=$1
 
-alias ls='ls --color=auto'
-export PATH="$PATH:/home/irshadcc/anaconda3/bin:/opt/cuda:/opt/cuda/lib"
-export DOCKER_HOST='127.0.0.1:2375'
-export _JAVA_OPTIONS=-Xmx512M
-export GOPATH="`pwd`:/home/irshadcc/go/"
+}
+bin_npm() {
+        PATH="`pwd`/node_modules/.bin:$PATH"
+}
+
+conda() {
+        # >>> conda initialize >>>
+        # !! Contents within this block are managed by 'conda init' !!
+        __conda_setup="$('/home/irshadcc/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+        if [ $? -eq 0 ]; then
+            eval "$__conda_setup"
+        else
+            if [ -f "/home/irshadcc/anaconda3/etc/profile.d/conda.sh" ]; then
+                . "/home/irshadcc/anaconda3/etc/profile.d/conda.sh"
+            else
+                export PATH="/home/irshadcc/anaconda3/bin:$PATH"
+            fi
+        fi
+        unset __conda_setup
+        # <<< conda initialize <<<
+}
+
